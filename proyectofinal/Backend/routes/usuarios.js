@@ -7,7 +7,7 @@ var con_mysql = config.con.virtualgym;
 //Get de todos los usuarios... no debería usarse
 router.get('/', function (req, res, next) {
     try {
-        var queryString = `SELECT id,altura,peso,sexo,edad,TO_BASE64(foto) AS foto, email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios`;
+        var queryString = `SELECT id,altura,peso,sexo,edad,foto, email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 router.get('/gimnasio/:idGimnasio', function (req, res, next) {
     try {
         var idGimnasio = req.params.idGimnasio;
-        var queryString = `SELECT id,altura,peso,sexo,edad,TO_BASE64(foto) AS foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios WHERE idGimnasio = ${idGimnasio}`;
+        var queryString = `SELECT id,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios WHERE idGimnasio = ${idGimnasio}`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -49,7 +49,7 @@ router.get('/email/:email/password/:password', function (req, res, next) {
         var email = req.params.email;
         var password = req.params.password;
 
-        var queryString = `SELECT id,altura,peso,sexo,edad,TO_BASE64(foto) AS foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where email = '${email}' AND password = '${password}'`;
+        var queryString = `SELECT id,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where email = '${email}' AND password = '${password}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -70,7 +70,7 @@ router.get('/:id', function (req, res, next) {
     try {
         var id = req.params.id;
 
-        var queryString = `SELECT id,altura,peso,sexo,edad,TO_BASE64(foto) AS foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where Id = '${id}'`;
+        var queryString = `SELECT id,altura,peso,sexo,edad, foto ,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where Id = '${id}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
