@@ -120,7 +120,7 @@ router.get('/test/generarHistorico', function (req, res, next) {
                     for(var i = 0; i < rows.length ; i++){
                         var usuario = rows[i];
                         //Genero entre 15 y 50 actividades por usuario
-                        var cantidadActividades = Math.floor((Math.random() * 100) + 15);
+                        var cantidadActividades = Math.floor((Math.random() * 1000) + 150);
                         // var cantidadActividades = Math.floor((Math.random() * 1) + 1);
                         registrosTotales += cantidadActividades;
                         
