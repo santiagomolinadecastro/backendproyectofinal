@@ -635,7 +635,7 @@
       const tensorAPredecir = tf.tensor2d([[17,58.904,20,0,30,1]]);
       let output = model.predict(xs);
       output.print();
-      console.log("esperado:","[21,162]");
+      console.log("esperado:","[21,162]",output);
       
       const saveResults = model.save('localstorage://my-model-1')
       .then((s) => {

@@ -17,10 +17,14 @@ var tipoActividad = require('./routes/tipoActividad');
 var usuarios = require('./routes/usuarios');
 var calculadora = require('./helpers/calculadora');
 
+var tensor = require('./tensor/module');
+
 var app = express();
 const jwt = require('jsonwebtoken');
 
 console.log("Servicio iniciado");
+tensor.setModel();
+
 
 app.use(logger('dev'));
 app.use(cookieParser());

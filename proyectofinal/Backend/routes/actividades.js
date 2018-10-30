@@ -3,6 +3,7 @@ var router = express.Router();
 var config = require('../config');
 var calculadora = require('../helpers/calculadora');
 var request = require('request');
+var tensor = require('../tensor/module');
 
 var con_mysql = config.con.virtualgym;
 
@@ -64,7 +65,7 @@ router.post('/', function (req, res, next) {
                 res.status(500).send("Error al insertar actividad:" + err + ". La query es: " + queryString);
             }
             else{
-                var queryString = `SELECT id,peso,sexo,edad FROM usuarios WHERE id = ${actividad.userId}`;
+                var queryString = `SELECT id,peso,sexo,edad,altura FROM usuarios WHERE id = ${actividad.userId}`;
                 con_mysql.query(queryString, function (err, rows, fields) { 
                     if (err){ 
                         res.status(500).send("Error al obtener usuario: " + err + ". La query es: " + queryString);
@@ -77,8 +78,10 @@ router.post('/', function (req, res, next) {
                                 res.status(500).send("Error al insertar historial:" + err + ". La query es: " + queryString);
                             }
                             else{
-                                var gramosQuemados = calculadora.getGramosQuemados(usuario.peso,usuario.sexo,actividad.tipoActividadId,minutosEntrenados);
-                                var nuevoPeso = usuario.peso - gramosQuemados;
+                                // var gramosQuemados = calculadora.getGramosQuemados(usuario.peso,usuario.sexo,actividad.tipoActividadId,minutosEntrenados);
+                                var prediccion = tensor.predecirActividad(usuario.altura,usuario.peso,usuario.edad,usuario.segundos,actividad.tipoActividadId,minutosEntrenados);
+                                console.log("la prediccion es:",prediccion);
+                                var nuevoPeso = usuario.peso - prediccion.gramosQuemados;
 
                                 var queryString = `UPDATE usuarios SET peso = ${nuevoPeso} WHERE id = ${usuario.id}`;
                                 con_mysql.query(queryString, function (err, rows, fields) { 
