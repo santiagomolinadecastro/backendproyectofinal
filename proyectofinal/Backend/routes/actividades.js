@@ -31,7 +31,7 @@ router.get('/:id', function (req, res, next) {
     try {
         var id = req.params.id;
 
-        var queryString = `SELECT * FROM actividades where Id = '${id}'`;
+        var queryString = `SELECT * FROM actividades where userId = '${id}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
