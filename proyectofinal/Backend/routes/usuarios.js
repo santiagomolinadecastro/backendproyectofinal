@@ -156,7 +156,7 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
         var frecuencia = req.params.frecuencia;
         var minutosEntrenados = req.params.minutosEntrenados;
 
-        var queryString = `SELECT id,altura,peso,sexo,myedad FROM usuarios where Id = '${id}'`;
+        var queryString = `SELECT id,altura,peso,sexo,edad FROM usuarios where Id = '${id}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
