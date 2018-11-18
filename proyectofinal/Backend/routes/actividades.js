@@ -79,7 +79,7 @@ router.post('/', function (req, res, next) {
                             }
                             else{
                                 // var gramosQuemados = calculadora.getGramosQuemados(usuario.peso,usuario.sexo,actividad.tipoActividadId,minutosEntrenados);
-                                var prediccion = tensor.predecirActividad(usuario.altura,usuario.peso,usuario.edad,usuario.segundos,actividad.tipoActividadId,minutosEntrenados);
+                                var prediccion = tensor.predecirActividad(usuario.altura,usuario.peso,usuario.edad,usuario.sexo,actividad.tipoActividadId,minutosEntrenados);
                                 console.log("la prediccion es:",prediccion);
                                 var nuevoPeso = usuario.peso - prediccion.gramosQuemados;
 
