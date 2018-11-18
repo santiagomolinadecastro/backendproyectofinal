@@ -60,6 +60,7 @@ CREATE TABLE `tensorTrain` (
 --Creacion tabla usuarios
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `altura` int(11) DEFAULT NULL,
   `peso` int(11) DEFAULT NULL,
   `sexo` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,

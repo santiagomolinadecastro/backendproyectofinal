@@ -8,7 +8,7 @@ var con_mysql = config.con.virtualgym;
 //Get de todos los usuarios... no debería usarse
 router.get('/', function (req, res, next) {
     try {
-        var queryString = `SELECT id,altura,peso,sexo,edad,foto, email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios`;
+        var queryString = `SELECT id,userName,altura,peso,sexo,edad,foto, email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
 router.get('/gimnasio/:idGimnasio', function (req, res, next) {
     try {
         var idGimnasio = req.params.idGimnasio;
-        var queryString = `SELECT id,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios WHERE idGimnasio = ${idGimnasio}`;
+        var queryString = `SELECT id,userName,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios WHERE idGimnasio = ${idGimnasio}`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -50,7 +50,7 @@ router.get('/email/:email/password/:password', function (req, res, next) {
         var email = req.params.email;
         var password = req.params.password;
 
-        var queryString = `SELECT id,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where email = '${email}' AND password = '${password}'`;
+        var queryString = `SELECT id,userName,altura,peso,sexo,edad,foto,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where email = '${email}' AND password = '${password}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -71,7 +71,7 @@ router.get('/:id', function (req, res, next) {
     try {
         var id = req.params.id;
 
-        var queryString = `SELECT id,altura,peso,sexo,edad, foto ,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where Id = '${id}'`;
+        var queryString = `SELECT id,userName,altura,peso,sexo,edad, foto ,email,deviceId, (peso / (altura * altura))*10000 as imc FROM usuarios where Id = '${id}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
@@ -93,7 +93,7 @@ router.post('/', function (req, res, next) {
     try {
         var usuario = req.body;
 
-        var queryString = `INSERT INTO usuarios (altura, peso, sexo, edad, foto, email, password, deviceId) VALUES (${usuario.altura},${usuario.peso*1000},'${usuario.sexo}',${usuario.edad},${usuario.foto},'${usuario.email}','${usuario.password}',${usuario.deviceId})`
+        var queryString = `INSERT INTO usuarios (altura, userName, peso, sexo, edad, foto, email, password, deviceId) VALUES (${usuario.altura},${usuario.userName},${usuario.peso*1000},'${usuario.sexo}',${usuario.edad},${usuario.foto},'${usuario.email}','${usuario.password}',${usuario.deviceId})`
         con_mysql.query(queryString, function (err, rows, fields) {
             if (err)
                 res.status(500).send("Error al insertar usuario:" + err + ". La query es: " + queryString);
@@ -113,7 +113,7 @@ router.put('/:id', function (req, res, next) {
         var id = req.params.id;
         var usuario = req.body;
 
-        var queryString = `UPDATE usuarios SET altura = '${usuario.altura}', peso = '${usuario.peso*1000}', sexo = '${usuario.sexo}', edad = '${usuario.edad}', foto = '${usuario.foto}', email = '${usuario.email}', password = '${usuario.password}', deviceId = '${usuario.deviceId}' WHERE id = '${id}'`
+        var queryString = `UPDATE usuarios SET altura = '${usuario.altura}', userName = '${usuario.userName}', peso = '${usuario.peso*1000}', sexo = '${usuario.sexo}', edad = '${usuario.edad}', foto = '${usuario.foto}', email = '${usuario.email}', password = '${usuario.password}', deviceId = '${usuario.deviceId}' WHERE id = '${id}'`
 
         con_mysql.query(queryString, function (err, rows, fields) {
             if (err)
@@ -156,7 +156,7 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
         var frecuencia = req.params.frecuencia;
         var minutosEntrenados = req.params.minutosEntrenados;
 
-        var queryString = `SELECT id,altura,peso,sexo,edad FROM usuarios where Id = '${id}'`;
+        var queryString = `SELECT id,altura,peso,sexo,myedad FROM usuarios where Id = '${id}'`;
 
 
         con_mysql.query(queryString, function (err, rows, fields) {
