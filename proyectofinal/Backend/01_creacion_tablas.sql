@@ -66,11 +66,12 @@ CREATE TABLE `usuarios` (
   `sexo` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `foto` mediumblob,
-  `email` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `email` varchar(45) COLLATE latin1_spanish_ci DEFAULT NOT NULL,
   `password` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
   `deviceId` int(11) DEFAULT NULL,
   `gimnasioId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  PRIMARY KEY (`email`),
   KEY `fk_gim_id_idx` (`gimnasioId`),
   CONSTRAINT `fk_gim_id` FOREIGN KEY (`gimnasioId`) REFERENCES `gimnasios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;

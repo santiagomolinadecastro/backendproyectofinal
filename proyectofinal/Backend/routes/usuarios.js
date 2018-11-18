@@ -93,7 +93,7 @@ router.post('/', function (req, res, next) {
     try {
         var usuario = req.body;
 
-        var queryString = `INSERT INTO usuarios (altura, userName, peso, sexo, edad, foto, email, password, deviceId) VALUES (${usuario.altura},${usuario.userName},${usuario.peso*1000},'${usuario.sexo}',${usuario.edad},${usuario.foto},'${usuario.email}','${usuario.password}',${usuario.deviceId})`
+        var queryString = `INSERT INTO usuarios (altura, userName, peso, sexo, edad, foto, email, password, deviceId) VALUES (${usuario.altura},'${usuario.userName}',${usuario.peso*1000},'${usuario.sexo}',${usuario.edad},${usuario.foto},'${usuario.email}','${usuario.password}',${usuario.deviceId})`
         con_mysql.query(queryString, function (err, rows, fields) {
             if (err)
                 res.status(500).send("Error al insertar usuario:" + err + ". La query es: " + queryString);
