@@ -136,16 +136,16 @@ router.put('/:id/reingreso', function (req, res, next) {
         var fe = new Date();
         var fecha = fe.toISOString().substring(0,10);
 
-        var queryString = `INSERT INTO historial (userID,altura,peso,fecha) VALUES (${usuario.userID},${usuario.altura},${usuario.peso*1000},'${fecha}');`
+        var queryString = `INSERT INTO historial (userID,altura,peso,fecha) VALUES (${id},${usuario.altura},${usuario.peso*1000},'${fecha}');`
 
         con_mysql.query(queryString, function (err, rows, fields) {
             if (err)
                 res.status(500).send("Error al reingresar usuario:" + err + ". La query es: " + queryString);
             else
                 {
-                    var queryString = `UPDATE usuarios SET altura = '${usuario.altura}', peso = '${usuario.peso*1000}', edad = '${usuario.edad}' WHERE id = '${id}'`
+                    var qs = `UPDATE usuarios SET altura = '${usuario.altura}', peso = '${usuario.peso*1000}', edad = '${usuario.edad}' WHERE id = '${id}'`
                     if(err){
-
+                        res.status(501).send("Error al reingresar usuario:" + err + ". La query es: " + qs);
                     }
                     else{
                         res.status(200).json(rows);
