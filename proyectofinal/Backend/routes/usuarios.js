@@ -145,7 +145,7 @@ router.put('/:id/reingreso', function (req, res, next) {
                 {
                     var qs = `UPDATE usuarios SET altura = '${usuario.altura}', peso = '${usuario.peso*1000}', edad = '${usuario.edad}' WHERE id = '${id}'`
 
-                    con_mysql.query(queryString, function (err, rows, fields) { 
+                    con_mysql.query(qs, function (err, rows, fields) { 
                     if(err){
                         res.status(501).send("Error al reingresar usuario:" + err + ". La query es: " + qs);
                     }
