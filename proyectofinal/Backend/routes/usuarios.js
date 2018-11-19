@@ -148,7 +148,7 @@ router.put('/:id/reingreso', function (req, res, next) {
                         res.status(501).send("Error al reingresar usuario:" + err + ". La query es: " + qs);
                     }
                     else{
-                        res.status(200).json(rows,qs);
+                        res.status(200).json(qs);
                     }
                 }
         });
