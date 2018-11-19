@@ -163,7 +163,7 @@ router.put('/:id/reingreso', function (req, res, next) {
 });
 
 //Get de predicciones de actividades de usuario por ID
-router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minutosEntrenados', function (req, res, next) {
+router.get('/:id/predicciones/caminar/frecuencia/:frecuencia/tiempoEntrenamiento/:minutosEntrenados', function (req, res, next) {
     try {
         var id = req.params.id;
         var frecuencia = req.params.frecuencia;
@@ -203,7 +203,7 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
                     caloriasQuemadas += prediccion.caloriasQuemadas;
                     gramosBajados += prediccion.gramosQuemados;
 
-                    pesoActual = pesoActual - prediccion.gramosQuemados;
+                    pesoActual -= prediccion.gramosQuemados;
 
                     var pred = {
                         dia: i,
@@ -221,9 +221,48 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
                     respuesta.anual.caminar.push(pred);
                 }
 
-                //Correr
-                tipoActividad = 2;
-                pesoActual = usuario.peso;
+                for(var i = 0; i < 9999999; i++){
+
+                }
+                res.status(200).json(respuesta);
+            }
+
+        });
+    }
+    catch (err) {
+        res.status(500).send("Error al conectar: " + err);
+    }
+});
+
+//Get de predicciones de actividades de usuario por ID
+router.get('/:id/predicciones/correr/frecuencia/:frecuencia/tiempoEntrenamiento/:minutosEntrenados', function (req, res, next) {
+    try {
+        var id = req.params.id;
+        var frecuencia = req.params.frecuencia;
+        var minutosEntrenados = req.params.minutosEntrenados;
+
+        var queryString = `SELECT id,altura,peso,sexo,edad FROM usuarios where Id = '${id}'`;
+
+
+        con_mysql.query(queryString, function (err, rows, fields) {
+            if (err)
+                res.status(500).send(err);
+            else {
+                var respuesta = {
+                    trimestral: {caminar: [], correr: []},
+                    semestral: {caminar: [], correr: []},
+                    anual: {caminar: [], correr: []}
+                }
+                var usuario = rows[0];
+                var pesoActual = usuario.peso;
+                var caloriasQuemadas = 0;
+                var gramosBajados = 0;
+                var saltosDias = Math.floor(7 / frecuencia);
+                var tipoActividad = 2;
+
+                console.log("saltos", saltosDias, saltosDias + 2);
+                // Proyecto para 3, 6 y 12 meses tanto caminar como correr.
+                // Caminar
                 for (var i = 0; i <= 365; i = i + saltosDias) {
                     //Caminando
                     var prediccion = tensor.predecirActividad(usuario.altura,
@@ -236,7 +275,7 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
                     caloriasQuemadas += prediccion.caloriasQuemadas;
                     gramosBajados += prediccion.gramosQuemados;
 
-                    pesoActual = pesoActual - prediccion.gramosQuemados;
+                    pesoActual -= prediccion.gramosQuemados;
 
                     var pred = {
                         dia: i,
@@ -246,12 +285,16 @@ router.get('/:id/predicciones/frecuencia/:frecuencia/tiempoEntrenamiento/:minuto
                     }
 
                     if (i <= 122) {
-                        respuesta.trimestral.correr.push(pred);
+                        respuesta.trimestral.caminar.push(pred);
                     }
                     if (i <= 244) {
-                        respuesta.semestral.correr.push(pred);
+                        respuesta.semestral.caminar.push(pred);
                     }
-                    respuesta.anual.correr.push(pred);
+                    respuesta.anual.caminar.push(pred);
+                }
+
+                for(var i = 0; i < 9999999; i++){
+
                 }
                 res.status(200).json(respuesta);
             }
