@@ -133,8 +133,10 @@ router.put('/:id/reingreso', function (req, res, next) {
     try {
         var id = req.params.id;
         var usuario = req.body;
+        var fe = new Date();
+        var fecha = fe.toISOString().substring(0,10);
 
-        var queryString = `INSERT INTO historial (userID,altura,peso,fecha) VALUES (${usuario.userID},${usuario.altura},${usuario.peso*1000},'${usuario.fecha}');`
+        var queryString = `INSERT INTO historial (userID,altura,peso,fecha) VALUES (${usuario.userID},${usuario.altura},${usuario.peso*1000},'${fecha}');`
 
         con_mysql.query(queryString, function (err, rows, fields) {
             if (err)
