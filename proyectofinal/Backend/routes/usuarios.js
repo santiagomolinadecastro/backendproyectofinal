@@ -140,7 +140,15 @@ router.put('/:id/reingreso', function (req, res, next) {
             if (err)
                 res.status(500).send("Error al reingresar usuario:" + err + ". La query es: " + queryString);
             else
-                res.status(200).json(rows);
+                {
+                    var queryString = `UPDATE usuarios SET altura = '${usuario.altura}', peso = '${usuario.peso*1000}', edad = '${usuario.edad}' WHERE id = '${id}'`
+                    if(err){
+
+                    }
+                    else{
+                        res.status(200).json(rows);
+                    }
+                }
         });
 
     }
