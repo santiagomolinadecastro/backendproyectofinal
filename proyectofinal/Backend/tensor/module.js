@@ -77,8 +77,8 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     // const tensorAPredecir = tf.tensor2d([[17,58.904,20,0,30,1]]);
     let output = exports.model.predict(tensorAPredecir);
     var formateado = {
-        gramosQuemados: actividad == 1 ? output.dataSync()[0] : output.dataSync()[0] * 0.9,
-        caloriasQuemadas: actividad == 1 ? output.dataSync()[1] : output.dataSync()[1] * 0.9
+        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + peso/2000) : (output.dataSync()[0] + peso/2000) * 0.9,
+        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + peso/2000) : (output.dataSync()[1] + peso/2000) * 0.9
     }
     return formateado;
 
