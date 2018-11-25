@@ -77,9 +77,9 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     // const tensorAPredecir = tf.tensor2d([[17,58.904,20,0,30,1]]);
     let output = exports.model.predict(tensorAPredecir);
 
-    var imc = parseInt(peso/1000 / (altura/10  * altura/10));
+    var imc = peso/1000 / (altura/100  * altura/100);
 
-    console.log("imc",imc);
+    console.log("peso",peso,"altura",altura,"imc",imc);
     var modificador = imc > 40 ? 100 :
                       imc > 35 ? 50 :
                       imc > 30 ? 25 :
