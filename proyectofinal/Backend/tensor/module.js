@@ -87,8 +87,8 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
  
                       
     var formateado = {
-        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + (peso * modificador)/3000) : (output.dataSync()[0] + (peso * modificador)/3000) * 0.9,
-        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + (peso * modificador)/3000) : (output.dataSync()[1] + (peso * modificador)/3000) * 0.9
+        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + (peso * modificador)/5000) : (output.dataSync()[0] + (peso * modificador)/5000) * 0.9,
+        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + (peso * modificador)/5000) : (output.dataSync()[1] + (peso * modificador)/5000) * 0.9
     }
     return formateado;
 
