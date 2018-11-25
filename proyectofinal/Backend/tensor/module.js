@@ -77,16 +77,16 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     // const tensorAPredecir = tf.tensor2d([[17,58.904,20,0,30,1]]);
     let output = exports.model.predict(tensorAPredecir);
 
-    var imc = peso / (altura/10  * altura/10);
+    var imc = parseInt(peso / (altura/10  * altura/10));
     var modificador = imc > 40 ? 5 :
                       imc > 35 ? 3 :
-                      imc > 30 ? 1.8 :
-                      imc > 25 ? 1 :
+                      imc > 30 ? 1.5 :
+                      imc > 25 ? 0.8 :
                       imc > 18 ? 0.4 :
                       0.2;
  
-    var nuevoPeso = output.dataSync()[0] + (peso * modificador)/3800;
-    var nuevasCalorias = output.dataSync()[1] + (peso * modificador)/3800;
+    var nuevoPeso = output.dataSync()[0] + (peso * modificador)/5000;
+    var nuevasCalorias = output.dataSync()[1] + (peso * modificador)/5000;
                       
     var formateado = {
         gramosQuemados: actividad == 1 ? nuevoPeso : nuevoPeso * 0.9,
