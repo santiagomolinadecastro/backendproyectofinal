@@ -80,12 +80,12 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     var imc = parseInt(peso/1000 / (altura/10  * altura/10));
 
     console.log("imc",imc);
-    var modificador = imc > 40 ? 5 :
-                      imc > 35 ? 3 :
-                      imc > 30 ? 1.5 :
-                      imc > 25 ? 0.8 :
-                      imc > 18 ? 0.4 :
-                      0.2;
+    var modificador = imc > 40 ? 50 :
+                      imc > 35 ? 30 :
+                      imc > 30 ? 15 :
+                      imc > 25 ? 8 :
+                      imc > 18 ? 4 :
+                      2;
  
     var nuevoPeso = output.dataSync()[0] * modificador;
     var nuevasCalorias = output.dataSync()[1] * modificador;
