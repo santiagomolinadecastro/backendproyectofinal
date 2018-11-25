@@ -4539,7 +4539,7 @@ exports.trainModel = function (model_) {
     })
 
     async function train() {
-      var iteraciones = 50;
+      var iteraciones = 5;
 
       for (let i = 0; i < iteraciones; i++) {
         const config = {
