@@ -76,9 +76,21 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     console.log(altura/10,peso/1000,edad,sexo,tiempo,actividad);
     // const tensorAPredecir = tf.tensor2d([[17,58.904,20,0,30,1]]);
     let output = exports.model.predict(tensorAPredecir);
+    var modificador = peso > 100 ? 1.2 :
+                      peso > 90 ? 1.1 :
+                      peso > 80 ? 1 :
+                      peso > 75 ? 0.9 :
+                      peso > 70 ? 0.8 :
+                      peso > 65 ? 0.7 :
+                      peso > 60 ? 0.6 :
+                      peso > 55 ? 0.5 :
+                      peso > 50 ? 0.4 :
+                      0.3;
+
+                      
     var formateado = {
-        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + peso/2000) : (output.dataSync()[0] + peso/2000) * 0.9,
-        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + peso/2000) : (output.dataSync()[1] + peso/2000) * 0.9
+        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + (peso * modificador)/2000) : (output.dataSync()[0] + (peso * modificador)/2000) * 0.9,
+        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + (peso * modificador)/2000) : (output.dataSync()[1] + (peso * modificador)/2000) * 0.9
     }
     return formateado;
 
