@@ -78,17 +78,17 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     let output = exports.model.predict(tensorAPredecir);
 
     var imc = peso / (altura/10  * altura/10);
-    var modificador = imc > 40 ? 1.4 :
-                      imc > 35 ? 1.2 :
-                      imc > 30 ? 1 :
-                      imc > 25 ? 0.8 :
-                      imc > 18 ? 0.6 :
-                      0.4;
+    var modificador = imc > 40 ? 1.6 :
+                      imc > 35 ? 1.3 :
+                      imc > 30 ? 1.1 :
+                      imc > 25 ? 0.7 :
+                      imc > 18 ? 0.5 :
+                      0.3;
  
                       
     var formateado = {
-        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + (peso * modificador)/2000) : (output.dataSync()[0] + (peso * modificador)/2000) * 0.9,
-        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + (peso * modificador)/2000) : (output.dataSync()[1] + (peso * modificador)/2000) * 0.9
+        gramosQuemados: actividad == 1 ? (output.dataSync()[0] + (peso * modificador)/1500) : (output.dataSync()[0] + (peso * modificador)/1500) * 0.9,
+        caloriasQuemadas: actividad == 1 ? (output.dataSync()[1] + (peso * modificador)/1500) : (output.dataSync()[1] + (peso * modificador)/1500) * 0.9
     }
     return formateado;
 
