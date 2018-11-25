@@ -85,8 +85,8 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
                       imc > 18 ? 0.4 :
                       0.2;
  
-    var nuevoPeso = output.dataSync()[0] + (peso * modificador)/5000;
-    var nuevasCalorias = output.dataSync()[1] + (peso * modificador)/5000;
+    var nuevoPeso = output.dataSync()[0] * modificador;
+    var nuevasCalorias = output.dataSync()[1] * modificador;
                       
     var formateado = {
         gramosQuemados: actividad == 1 ? nuevoPeso : nuevoPeso * 0.9,
