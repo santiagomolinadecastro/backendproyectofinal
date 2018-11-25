@@ -84,12 +84,12 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
                       imc > 37 ? 4 :
                       imc > 35 ? 3.3 :
                       imc > 35 ? 3 :
-                      imc > 30 ? 2.3 :
-                      imc > 27 ? 2 :
-                      imc > 25 ? 1.7 :
-                      imc > 21 ? 1.3 :
-                      imc > 18 ? 1 :
-                      0.5;
+                      imc > 30 ? 1.5 :
+                      imc > 27 ? 1.2 :
+                      imc > 25 ? 1 :
+                      imc > 21 ? 0.8 :
+                      imc > 18 ? 0.4 :
+                      0.2;
  
     var nuevoPeso = output.dataSync()[0] * modificador;
     var nuevasCalorias = output.dataSync()[1] * modificador;
