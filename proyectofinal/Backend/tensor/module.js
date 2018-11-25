@@ -81,9 +81,13 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
 
     console.log("peso",peso,"altura",altura,"imc",imc);
     var modificador = imc > 40 ? 5 :
+                      imc > 37 ? 4 :
+                      imc > 35 ? 3.3 :
                       imc > 35 ? 3 :
                       imc > 30 ? 2.5 :
+                      imc > 27 ? 2.8 :
                       imc > 25 ? 2 :
+                      imc > 21 ? 1.7 :
                       imc > 18 ? 1 :
                       0.5;
  
