@@ -78,10 +78,10 @@ exports.predecirActividad = function (altura,peso,edad,sexo,actividad,tiempo) {
     let output = exports.model.predict(tensorAPredecir);
 
     var imc = peso / (altura/10  * altura/10);
-    var modificador = imc > 40 ? 2 :
-                      imc > 35 ? 1.5 :
-                      imc > 30 ? 1.2 :
-                      imc > 25 ? 0.7 :
+    var modificador = imc > 40 ? 3 :
+                      imc > 35 ? 2.2 :
+                      imc > 30 ? 1.5 :
+                      imc > 25 ? 1 :
                       imc > 18 ? 0.4 :
                       0.2;
  
