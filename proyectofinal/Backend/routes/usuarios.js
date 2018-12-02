@@ -179,8 +179,11 @@ router.get('/:id/predicciones/caminar/frecuencia/:frecuencia/tiempoEntrenamiento
                 var respuesta = {
                     trimestral: {caminar: [], correr: []},
                     semestral: {caminar: [], correr: []},
-                    anual: {caminar: [], correr: []}
+                    anual: {caminar: [], correr: []},
+                    anualMayor: {caminar: [], correr: []},
+                    anualMenor: {caminar: [], correr: []}
                 }
+                
                 var usuario = rows[0];
                 var pesoActual = usuario.peso;
                 var caloriasQuemadas = 0;
@@ -221,9 +224,72 @@ router.get('/:id/predicciones/caminar/frecuencia/:frecuencia/tiempoEntrenamiento
                     respuesta.anual.caminar.push(pred);
                 }
 
-                for(var i = 0; i < 9999999; i++){
+                // Proyecto para alguien que pesa mas
+                // Caminar
+                var usuario = rows[0];
+                var pesoActual = usuario.peso * 1.1;
+                var caloriasQuemadas = 0;
+                var gramosBajados = 0;
+                var saltosDias = Math.floor(7 / frecuencia);
+                var tipoActividad = 1;
 
+                for (var i = 0; i <= 365; i = i + saltosDias) {
+                    //Caminando
+                    var prediccion = tensor.predecirActividad(usuario.altura,
+                        pesoActual,
+                        usuario.edad,
+                        usuario.sexo,
+                        tipoActividad,
+                        minutosEntrenados);
+
+                    caloriasQuemadas += prediccion.caloriasQuemadas;
+                    gramosBajados += prediccion.gramosQuemados;
+
+                    pesoActual -= prediccion.gramosQuemados;
+
+                    var pred = {
+                        dia: i,
+                        pesoActual: pesoActual,
+                        caloriasQuemadas: caloriasQuemadas,
+                        gramosBajados: gramosBajados
+                    }
+
+                    respuesta.anualMayor.caminar.push(pred);
                 }
+
+                // Proyecto para alguien que pesa menos
+                // Caminar
+                var usuario = rows[0];
+                var pesoActual = usuario.peso * 0.9;
+                var caloriasQuemadas = 0;
+                var gramosBajados = 0;
+                var saltosDias = Math.floor(7 / frecuencia);
+                var tipoActividad = 1;
+
+                for (var i = 0; i <= 365; i = i + saltosDias) {
+                    //Caminando
+                    var prediccion = tensor.predecirActividad(usuario.altura,
+                        pesoActual,
+                        usuario.edad,
+                        usuario.sexo,
+                        tipoActividad,
+                        minutosEntrenados);
+
+                    caloriasQuemadas += prediccion.caloriasQuemadas;
+                    gramosBajados += prediccion.gramosQuemados;
+
+                    pesoActual -= prediccion.gramosQuemados;
+
+                    var pred = {
+                        dia: i,
+                        pesoActual: pesoActual,
+                        caloriasQuemadas: caloriasQuemadas,
+                        gramosBajados: gramosBajados
+                    }
+
+                    respuesta.anualMenor.caminar.push(pred);
+                }
+
                 res.status(200).json(respuesta);
             }
 
@@ -251,7 +317,9 @@ router.get('/:id/predicciones/correr/frecuencia/:frecuencia/tiempoEntrenamiento/
                 var respuesta = {
                     trimestral: {caminar: [], correr: []},
                     semestral: {caminar: [], correr: []},
-                    anual: {caminar: [], correr: []}
+                    anual: {caminar: [], correr: []},
+                    anualMayor: {caminar: [], correr: []},
+                    anualMenor: {caminar: [], correr: []}
                 }
                 var usuario = rows[0];
                 var pesoActual = usuario.peso;
@@ -293,9 +361,74 @@ router.get('/:id/predicciones/correr/frecuencia/:frecuencia/tiempoEntrenamiento/
                     respuesta.anual.caminar.push(pred);
                 }
 
-                for(var i = 0; i < 9999999; i++){
+                // Proyecto para alguien que pesa mas
+                // Caminar
+                var usuario = rows[0];
+                var pesoActual = usuario.peso * 1.1;
+                var caloriasQuemadas = 0;
+                var gramosBajados = 0;
+                var saltosDias = Math.floor(7 / frecuencia);
+                var tipoActividad = 2;
 
+                for (var i = 0; i <= 365; i = i + saltosDias) {
+                    //Caminando
+                    var prediccion = tensor.predecirActividad(usuario.altura,
+                        pesoActual,
+                        usuario.edad,
+                        usuario.sexo,
+                        tipoActividad,
+                        minutosEntrenados);
+
+                    caloriasQuemadas += prediccion.caloriasQuemadas;
+                    gramosBajados += prediccion.gramosQuemados;
+
+                    pesoActual -= prediccion.gramosQuemados;
+
+                    var pred = {
+                        dia: i,
+                        pesoActual: pesoActual,
+                        caloriasQuemadas: caloriasQuemadas,
+                        gramosBajados: gramosBajados
+                    }
+
+                    respuesta.anualMayor.caminar.push(pred);
                 }
+
+                // Proyecto para alguien que pesa menos
+                // Caminar
+                var usuario = rows[0];
+                var pesoActual = usuario.peso * 0.9;
+                var caloriasQuemadas = 0;
+                var gramosBajados = 0;
+                var saltosDias = Math.floor(7 / frecuencia);
+                var tipoActividad = 2;
+
+                for (var i = 0; i <= 365; i = i + saltosDias) {
+                    //Caminando
+                    var prediccion = tensor.predecirActividad(usuario.altura,
+                        pesoActual,
+                        usuario.edad,
+                        usuario.sexo,
+                        tipoActividad,
+                        minutosEntrenados);
+
+                    caloriasQuemadas += prediccion.caloriasQuemadas;
+                    gramosBajados += prediccion.gramosQuemados;
+
+                    pesoActual -= prediccion.gramosQuemados;
+
+                    var pred = {
+                        dia: i,
+                        pesoActual: pesoActual,
+                        caloriasQuemadas: caloriasQuemadas,
+                        gramosBajados: gramosBajados
+                    }
+
+                    respuesta.anualMenor.caminar.push(pred);
+                }
+
+
+
                 res.status(200).json(respuesta);
             }
 
